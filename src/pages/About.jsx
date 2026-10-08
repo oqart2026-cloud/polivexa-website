@@ -12,6 +12,7 @@ import {
 import abhishekImage from "../assets/abhishek.jpg";
 import ajayImage from "../assets/ajay.jpeg";
 import meghaImage from "../assets/megha.jpeg";
+import saritaImage from "../assets/sarita.jpeg";
 import ujwalImage from "../assets/ujwal.jpeg";
 
 /* =========================================================
@@ -35,7 +36,6 @@ function FounderCard({
       className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl"
     >
       <div className="grid lg:grid-cols-5">
-
         {/* =====================================================
             IMAGE
         ===================================================== */}
@@ -109,7 +109,6 @@ function FounderCard({
 function About() {
   return (
     <div className="bg-white text-slate-900">
-
       {/* =====================================================
           HERO
       ===================================================== */}
@@ -153,7 +152,6 @@ function About() {
       <section className="py-20 sm:py-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid items-center gap-12 lg:grid-cols-2">
-
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -209,7 +207,6 @@ function About() {
               </p>
 
               <div className="mt-8 grid grid-cols-2 gap-4">
-
                 <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
                   <ShieldCheck className="text-cyan-300" size={25} />
                   <p className="mt-3 font-semibold text-white">
@@ -237,10 +234,8 @@ function About() {
                     Growth
                   </p>
                 </div>
-
               </div>
             </motion.div>
-
           </div>
         </div>
       </section>
@@ -273,7 +268,7 @@ function About() {
           <div className="mt-14">
             <FounderCard
               name="Abhishek Bharti"
-              designation="Founder"
+              designation="CTO"
               image={abhishekImage}
               tags={[
                 "Entrepreneur",
@@ -321,12 +316,13 @@ function About() {
               ]}
             >
               <p>
-                Mr. Ajay Kumar Paswan is a young, dynamic, and forward-looking
-                professional with extensive experience in media, international
-                trade, renewable energy, government projects, and social
-                development initiatives. A postgraduate from the University
-                of Allahabad, he has built a diverse professional career
-                through leadership roles across multiple sectors.
+                Mr. Ajay Kumar Paswan is a young, dynamic, and
+                forward-looking professional with extensive experience in
+                media, international trade, renewable energy, government
+                projects, and social development initiatives. A postgraduate
+                from the University of Allahabad, he has built a diverse
+                professional career through leadership roles across multiple
+                sectors.
               </p>
 
               <p>
@@ -413,7 +409,63 @@ function About() {
           </div>
 
           {/* =================================================
-              4. UJJAWAL RAJ — CO-FOUNDER
+              4. SARITA SINGH — CO-FOUNDER
+          ================================================= */}
+          <div className="mt-10">
+            <FounderCard
+              name="Sarita Singh"
+              designation="Co-Founder"
+              image={saritaImage}
+              reverse
+              tags={[
+                "Public Service",
+                "Social Impact",
+                "Leadership",
+                "Community Development",
+              ]}
+            >
+              <p>
+                Sarita Singh is a postgraduate professional with over 15 years
+                of experience in social work and public service.
+              </p>
+
+              <p>
+                She has served as a Member of the Legislative Assembly (MLA)
+                from Rohtash Nagar, Delhi. She has also served as
+                Parliamentary Secretary for Employment, working towards
+                employment and opportunity-related initiatives.
+              </p>
+
+              <p>
+                Her work has been strongly focused on the empowerment of
+                women and development of youth. She has actively supported
+                job fairs, student counselling and employment-oriented
+                programmes.
+              </p>
+
+              <p>
+                She has promoted women's safety, self-defence, education and
+                empowerment initiatives, along with community outreach,
+                public engagement and grassroots social development.
+              </p>
+
+              <p>
+                Sarita Singh is a confident communicator and leader with
+                strengths in programme coordination, leadership and public
+                relations. She is known for her commitment, compassion,
+                determination and people-centric approach.
+              </p>
+
+              <p>
+                Her vision is to create meaningful opportunities for women,
+                youth and communities and contribute to inclusive social
+                development.
+              </p>
+            </FounderCard>
+          </div>
+
+          {/* =================================================
+              5. UJJAWAL RAJ — CO-FOUNDER
           ================================================= */}
           <div className="mt-10">
             <FounderCard
@@ -472,7 +524,6 @@ function About() {
               </p>
             </FounderCard>
           </div>
-
         </div>
       </section>
 
@@ -481,9 +532,7 @@ function About() {
       ===================================================== */}
       <section className="py-20 sm:py-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-
           <div className="grid gap-6 md:grid-cols-2">
-
             <motion.div
               initial={{ opacity: 0, x: -25 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -525,7 +574,6 @@ function About() {
                 responsible innovation.
               </p>
             </motion.div>
-
           </div>
         </div>
       </section>
@@ -535,7 +583,6 @@ function About() {
       ===================================================== */}
       <section className="bg-slate-50 py-20 sm:py-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-
           <div className="mx-auto max-w-3xl text-center">
             <p className="text-sm font-bold tracking-[0.2em] text-cyan-600">
               OUR VALUES
@@ -547,9 +594,6 @@ function About() {
           </div>
 
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-
-
-
             {[
               {
                 icon: ShieldCheck,
@@ -559,7 +603,6 @@ function About() {
               {
                 icon: Lightbulb,
                 title: "Innovation",
-                
                 text: "We continuously look for smarter and more practical ways to solve problems.",
               },
               {
@@ -601,7 +644,6 @@ function About() {
                 </motion.div>
               );
             })}
-
           </div>
         </div>
       </section>
@@ -611,7 +653,6 @@ function About() {
       ===================================================== */}
       <section className="bg-[#06152f] py-20">
         <div className="mx-auto max-w-4xl px-6 text-center lg:px-8">
-
           <h2 className="text-3xl font-bold text-white sm:text-4xl">
             Let's Build a More Trusted Digital Future
           </h2>
@@ -628,10 +669,8 @@ function About() {
             Talk to an Expert
             <ArrowRight size={18} />
           </a>
-
         </div>
       </section>
-
     </div>
   );
 }
