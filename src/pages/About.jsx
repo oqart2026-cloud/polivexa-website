@@ -548,6 +548,8 @@ function About() {
 
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
 
+
+
             {[
               {
                 icon: ShieldCheck,
@@ -557,6 +559,7 @@ function About() {
               {
                 icon: Lightbulb,
                 title: "Innovation",
+                
                 text: "We continuously look for smarter and more practical ways to solve problems.",
               },
               {
