@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -25,7 +24,6 @@ function Hero() {
 
   return (
     <section className="relative w-full overflow-hidden bg-[#061126]">
-
       <AnimatePresence mode="wait">
         {/* SLIDE 1: FULL IMAGE */}
         {currentSlide === 0 && (
@@ -41,7 +39,7 @@ function Hero() {
               src={dpdpHero1}
               alt="Polivexa DPDP Compliance and Data Protection Solutions"
               fetchPriority="high"
-              className="block w-full h-auto max-w-full"
+              className="block h-auto w-full max-w-full object-contain"
               style={{ objectFit: "contain" }}
             />
           </motion.div>
@@ -64,14 +62,12 @@ function Hero() {
 
               <h2 className="text-3xl font-bold leading-tight text-white sm:text-4xl md:text-6xl">
                 Protect Every
-                <span className="mt-1 block text-cyan-400">
-                  Piece of Data.
-                </span>
+                <span className="mt-1 block text-cyan-400">Piece of Data.</span>
               </h2>
 
               <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-slate-300 sm:text-base md:mt-6 md:text-lg md:leading-8">
-                Build stronger privacy frameworks, reduce compliance risks,
-                and create trust through responsible data protection.
+                Build stronger privacy frameworks, reduce compliance risks, and
+                create trust through responsible data protection.
               </p>
 
               <a
@@ -111,9 +107,7 @@ function Hero() {
           onClick={() => setCurrentSlide(0)}
           aria-label="Show first slide"
           className={`h-2 rounded-full transition-all ${
-            currentSlide === 0
-              ? "w-7 bg-cyan-400"
-              : "w-2 bg-white/50"
+            currentSlide === 0 ? "w-7 bg-cyan-400" : "w-2 bg-white/50"
           }`}
         />
 
@@ -122,9 +116,7 @@ function Hero() {
           onClick={() => setCurrentSlide(1)}
           aria-label="Show second slide"
           className={`h-2 rounded-full transition-all ${
-            currentSlide === 1
-              ? "w-7 bg-cyan-400"
-              : "w-2 bg-white/50"
+            currentSlide === 1 ? "w-7 bg-cyan-400" : "w-2 bg-white/50"
           }`}
         />
       </div>
