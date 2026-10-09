@@ -7,6 +7,20 @@ function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
 
+  const closeMenus = () => {
+    setMobileOpen(false);
+    setServicesOpen(false);
+  };
+
+  const navLinkClass =
+    "rounded-lg border border-transparent px-3 py-2 text-sm font-medium text-slate-700 transition-all duration-300 hover:border-cyan-200 hover:bg-cyan-50 hover:text-cyan-600 hover:shadow-sm";
+
+  const mobileLinkClass =
+    "rounded-lg px-4 py-3 text-sm font-medium text-slate-700 hover:bg-cyan-50 hover:text-cyan-600";
+
+  const mobileSubLinkClass =
+    "block rounded-lg px-4 py-3 text-sm text-slate-600 transition hover:bg-cyan-50 hover:text-cyan-600";
+
   return (
     <header className="fixed left-0 right-0 top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur-md">
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-8">
@@ -14,10 +28,7 @@ function Navbar() {
         <Link
           to="/"
           className="flex items-center gap-6"
-          onClick={() => {
-            setMobileOpen(false);
-            setServicesOpen(false);
-          }}
+          onClick={closeMenus}
         >
           <img
             src={polivexaLogo}
@@ -28,31 +39,26 @@ function Navbar() {
 
         {/* Desktop Navigation */}
         <nav className="hidden items-center gap-8 lg:flex">
-          <Link
-            to="/"
-            className="text-sm font-medium text-slate-700 px-3 py-2 rounded-lg border border-transparent transition-all duration-300 hover:bg-cyan-50 hover:text-cyan-600 hover:border-cyan-200 hover:shadow-sm"
-          >
+          <Link to="/" className={navLinkClass}>
             Home
           </Link>
 
-          {/* About */}
-          <Link
-            to="/about"
-            className="text-sm font-medium text-slate-700 px-3 py-2 rounded-lg border border-transparent transition-all duration-300 hover:bg-cyan-50 hover:text-cyan-600 hover:border-cyan-200 hover:shadow-sm"
-          >
+          <Link to="/about" className={navLinkClass}>
             About Us
           </Link>
 
-          {/* Products & Services Dropdown */}
+          {/* Desktop Products & Services Dropdown */}
           <div className="relative">
             <button
+              type="button"
               onClick={() => setServicesOpen(!servicesOpen)}
-              className="flex items-center gap-1 text-sm font-medium text-slate-700 px-3 py-2 rounded-lg border border-transparent transition-all duration-300 hover:bg-cyan-50 hover:text-cyan-600 hover:border-cyan-200 hover:shadow-sm"
+              aria-expanded={servicesOpen}
+              className={`flex items-center gap-1 ${navLinkClass}`}
             >
               Products & Services
               <ChevronDown
                 size={16}
-                className={`transition-transform ${
+                className={`transition-transform duration-200 ${
                   servicesOpen ? "rotate-180" : ""
                 }`}
               />
@@ -60,37 +66,34 @@ function Navbar() {
 
             {servicesOpen && (
               <div className="absolute left-0 top-full mt-4 w-64 rounded-xl border border-slate-200 bg-white p-2 shadow-xl">
-                {/* All Services */}
                 <Link
                   to="/services"
-                  onClick={() => setServicesOpen(false)}
-                  className="block rounded-lg px-4 py-3 text-sm text-slate-700 transition hover:bg-cyan-50 hover:text-cyan-600"
+                  onClick={closeMenus}
+                  className={mobileSubLinkClass}
                 >
                   All Products & Services
                 </Link>
 
-               {/* DPDP Compliance */}
-                 <Link
-                   to="/services/dpdp-gap-assessment"
-                   onClick={() => setServicesOpen(false)}
-                   className="block rounded-lg px-4 py-3 text-sm text-slate-700 transition hover:bg-cyan-50 hover:text-cyan-600"
-                    >
-                   DPDP Compliance
-                   </Link>
-                {/* Privacy Compliance */}
+                <Link
+                  to="/services/dpdp-gap-assessment"
+                  onClick={closeMenus}
+                  className={mobileSubLinkClass}
+                >
+                  DPDP Compliance
+                </Link>
+
                 <Link
                   to="/services/privacy-compliance"
-                  onClick={() => setServicesOpen(false)}
-                  className="block rounded-lg px-4 py-3 text-sm text-slate-700 transition hover:bg-cyan-50 hover:text-cyan-600"
+                  onClick={closeMenus}
+                  className={mobileSubLinkClass}
                 >
                   Privacy Compliance
                 </Link>
 
-                {/* Data Protection Advisory */}
                 <Link
                   to="/services/data-protection-advisory"
-                  onClick={() => setServicesOpen(false)}
-                  className="block rounded-lg px-4 py-3 text-sm text-slate-700 transition hover:bg-cyan-50 hover:text-cyan-600"
+                  onClick={closeMenus}
+                  className={mobileSubLinkClass}
                 >
                   Data Protection Advisory
                 </Link>
@@ -98,36 +101,29 @@ function Navbar() {
             )}
           </div>
 
-          {/* Careers */}
-          <Link
-            to="/careers"
-            className="text-sm font-medium text-slate-700 px-3 py-2 rounded-lg border border-transparent transition-all duration-300 hover:bg-cyan-50 hover:text-cyan-600 hover:border-cyan-200 hover:shadow-sm"
-          >
+          <Link to="/careers" className={navLinkClass}>
             Careers
           </Link>
 
-          {/* Blogs */}
-          <Link
-            to="/blogs"
-            className="text-sm font-medium text-slate-700 px-3 py-2 rounded-lg border border-transparent transition-all duration-300 hover:bg-cyan-50 hover:text-cyan-600 hover:border-cyan-200 hover:shadow-sm"
-          >
+          <Link to="/blogs" className={navLinkClass}>
             Blogs & Updates
           </Link>
 
-          {/* Contact */}
-          <Link
-            to="/contact"
-            className="text-sm font-medium text-slate-700 px-3 py-2 rounded-lg border border-transparent transition-all duration-300 hover:bg-cyan-50 hover:text-cyan-600 hover:border-cyan-200 hover:shadow-sm"
-          >
+          <Link to="/contact" className={navLinkClass}>
             Contact Us
           </Link>
         </nav>
 
         {/* Mobile Menu Button */}
         <button
-          onClick={() => setMobileOpen(!mobileOpen)}
+          type="button"
+          onClick={() => {
+            setMobileOpen(!mobileOpen);
+            setServicesOpen(false);
+          }}
           className="rounded-lg p-2 text-slate-700 lg:hidden"
-          aria-label="Toggle menu"
+          aria-label={mobileOpen ? "Close menu" : "Open menu"}
+          aria-expanded={mobileOpen}
         >
           {mobileOpen ? <X size={26} /> : <Menu size={26} />}
         </button>
@@ -135,13 +131,13 @@ function Navbar() {
 
       {/* Mobile Navigation */}
       {mobileOpen && (
-        <div className="border-t border-slate-200 bg-white px-6 py-5 lg:hidden">
-          <div className="flex flex-col gap-2">
+        <div className="max-h-[calc(100vh-5rem)] overflow-y-auto border-t border-slate-200 bg-white px-6 py-5 lg:hidden">
+          <nav className="flex flex-col gap-2">
             {/* Home */}
             <Link
               to="/"
-              onClick={() => setMobileOpen(false)}
-              className="rounded-lg px-4 py-3 text-sm font-medium text-slate-700 hover:bg-cyan-50"
+              onClick={closeMenus}
+              className={mobileLinkClass}
             >
               Home
             </Link>
@@ -149,26 +145,72 @@ function Navbar() {
             {/* About */}
             <Link
               to="/about"
-              onClick={() => setMobileOpen(false)}
-              className="rounded-lg px-4 py-3 text-sm font-medium text-slate-700 hover:bg-cyan-50"
+              onClick={closeMenus}
+              className={mobileLinkClass}
             >
               About Us
             </Link>
 
-            {/* Services */}
-            <Link
-              to="/services"
-              onClick={() => setMobileOpen(false)}
-              className="rounded-lg px-4 py-3 text-sm font-medium text-slate-700 hover:bg-cyan-50"
-            >
-              Products & Services
-            </Link>
+            {/* Mobile Products & Services Dropdown */}
+            <div className="flex flex-col">
+              <button
+                type="button"
+                onClick={() => setServicesOpen(!servicesOpen)}
+                aria-expanded={servicesOpen}
+                className="flex w-full items-center justify-between rounded-lg px-4 py-3 text-left text-sm font-medium text-slate-700 transition hover:bg-cyan-50 hover:text-cyan-600"
+              >
+                <span>Products & Services</span>
+
+                <ChevronDown
+                  size={18}
+                  className={`transition-transform duration-200 ${
+                    servicesOpen ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+
+              {servicesOpen && (
+                <div className="ml-4 mt-1 flex flex-col border-l-2 border-cyan-200 pl-3">
+                  <Link
+                    to="/services"
+                    onClick={closeMenus}
+                    className={mobileSubLinkClass}
+                  >
+                    All Products & Services
+                  </Link>
+
+                  <Link
+                    to="/services/dpdp-gap-assessment"
+                    onClick={closeMenus}
+                    className={mobileSubLinkClass}
+                  >
+                    DPDP Compliance
+                  </Link>
+
+                  <Link
+                    to="/services/privacy-compliance"
+                    onClick={closeMenus}
+                    className={mobileSubLinkClass}
+                  >
+                    Privacy Compliance
+                  </Link>
+
+                  <Link
+                    to="/services/data-protection-advisory"
+                    onClick={closeMenus}
+                    className={mobileSubLinkClass}
+                  >
+                    Data Protection Advisory
+                  </Link>
+                </div>
+              )}
+            </div>
 
             {/* Careers */}
             <Link
               to="/careers"
-              onClick={() => setMobileOpen(false)}
-              className="rounded-lg px-4 py-3 text-sm font-medium text-slate-700 hover:bg-cyan-50"
+              onClick={closeMenus}
+              className={mobileLinkClass}
             >
               Careers
             </Link>
@@ -176,8 +218,8 @@ function Navbar() {
             {/* Blogs */}
             <Link
               to="/blogs"
-              onClick={() => setMobileOpen(false)}
-              className="rounded-lg px-4 py-3 text-sm font-medium text-slate-700 hover:bg-cyan-50"
+              onClick={closeMenus}
+              className={mobileLinkClass}
             >
               Blogs & Updates
             </Link>
@@ -185,12 +227,12 @@ function Navbar() {
             {/* Contact */}
             <Link
               to="/contact"
-              onClick={() => setMobileOpen(false)}
-              className="mt-2 rounded-lg bg-slate-950 px-4 py-3 text-center text-sm font-semibold text-white"
+              onClick={closeMenus}
+              className="mt-2 rounded-lg bg-slate-950 px-4 py-3 text-center text-sm font-semibold text-white transition hover:bg-slate-800"
             >
               Contact Us
             </Link>
-          </div>
+          </nav>
         </div>
       )}
     </header>
