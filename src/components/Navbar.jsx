@@ -69,15 +69,14 @@ function Navbar() {
                   All Products & Services
                 </Link>
 
-                {/* DPDP Gap Assessment */}
-                <Link
-                  to="/services/dpdp-gap-assessment"
-                  onClick={() => setServicesOpen(false)}
-                  className="block rounded-lg px-4 py-3 text-sm text-slate-700 transition hover:bg-cyan-50 hover:text-cyan-600"
-                >
-                  DPDP Gap Assessment
-                </Link>
-
+               {/* DPDP Compliance */}
+                 <Link
+                   to="/services/dpdp-gap-assessment"
+                   onClick={() => setServicesOpen(false)}
+                   className="block rounded-lg px-4 py-3 text-sm text-slate-700 transition hover:bg-cyan-50 hover:text-cyan-600"
+                    >
+                   DPDP Compliance
+                   </Link>
                 {/* Privacy Compliance */}
                 <Link
                   to="/services/privacy-compliance"

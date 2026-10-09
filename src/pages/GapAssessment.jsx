@@ -128,9 +128,9 @@ function GapAssessment() {
 
             {/* Heading */}
             <h1 className="text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl lg:text-7xl">
-              DPDP Gap
+              DPDP Compliance
               <span className="block bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-                Assessment
+                
               </span>
             </h1>
 
