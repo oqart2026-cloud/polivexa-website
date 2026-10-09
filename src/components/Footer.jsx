@@ -86,7 +86,7 @@ function Footer() {
             <ul className="mt-6 space-y-4">
               <li>
                 <a href="/services" className="text-sm text-slate-400 transition hover:text-cyan-300">
-                  DPDP Gap Assessment
+                  DPDP Compliance
                 </a>
               </li>
 

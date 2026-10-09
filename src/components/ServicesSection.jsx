@@ -12,7 +12,7 @@ function ServicesSection() {
   const services = [
     {
       icon: ClipboardCheck,
-      title: "DPDP Gap Assessment",
+      title: "DPDP Compliance",
       text: "Assess your current privacy practices and identify areas that require attention under the DPDP framework.",
     },
     {
