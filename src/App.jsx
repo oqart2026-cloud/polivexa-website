@@ -20,6 +20,7 @@ import PrivacyCompliance from "./pages/PrivacyCompliance";
 import DataProtectionAdvisory from "./pages/DataProtectionAdvisory";
 import About from "./pages/About";
 import WhatsAppButton from "./components/WhatsAppButton";
+import PrivacyConsent from "./PrivacyConsent";
 
 
 function Home() {
@@ -77,6 +78,9 @@ function App() {
         <Footer />
 
         <WhatsAppButton />
+
+        <PrivacyConsent />
+
       </div>
     </BrowserRouter>
   );

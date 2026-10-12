@@ -1,3 +1,5 @@
+
+import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   Mail,
@@ -8,9 +10,68 @@ import {
 } from "lucide-react";
 
 function Contact() {
+  const [status, setStatus] = useState("idle");
+  const [statusMessage, setStatusMessage] = useState("");
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+
+    if (status === "loading") return;
+
+    setStatus("loading");
+    setStatusMessage("");
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    const payload = {
+      name: formData.get("name")?.toString().trim() || "",
+      email: formData.get("email")?.toString().trim() || "",
+      phone: formData.get("phone")?.toString().trim() || "",
+      message: formData.get("message")?.toString().trim() || "",
+    };
+
+    try {
+      const apiBaseUrl = (
+        import.meta.env.VITE_API_URL ||
+        "http://localhost:5000"
+      ).replace(/\/+$/, "");
+
+      const response = await fetch(`${apiBaseUrl}/api/contact`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          result.message || "Your message could not be sent. Please try again."
+        );
+      }
+
+      setStatus("success");
+      setStatusMessage(
+        "Thank you for contacting us! We have received your message and will connect with you soon."
+      );
+
+      form.reset();
+    } catch (error) {
+      console.error("Contact form submission failed:", error);
+
+      setStatus("error");
+      setStatusMessage(
+        error.message ||
+          "Sorry, your message could not be sent. Please try again."
+      );
+    }
+  }
+
   return (
     <div className="bg-white">
-
       {/* Hero */}
       <section className="relative overflow-hidden bg-slate-950 pb-24 pt-40">
         <div className="pointer-events-none absolute -left-40 top-10 h-96 w-96 rounded-full bg-cyan-500/10 blur-3xl" />
@@ -45,9 +106,7 @@ function Contact() {
       {/* Contact Section */}
       <section className="py-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-
           <div className="grid gap-12 lg:grid-cols-2">
-
             {/* Contact Information */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
@@ -71,7 +130,6 @@ function Contact() {
               </p>
 
               <div className="mt-10 space-y-5">
-
                 <div className="flex items-start gap-4 rounded-2xl border border-slate-200 p-5">
                   <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-cyan-50">
                     <Mail className="text-cyan-600" size={23} />
@@ -120,7 +178,7 @@ function Contact() {
                       Office
                     </p>
 
-                    <p className="mt-1 leading-6 font-medium text-slate-900">
+                    <p className="mt-1 font-medium leading-6 text-slate-900">
                       Tech Zone IV, Tower-3, B-603,
                       <br />
                       Greater Noida West,
@@ -129,7 +187,6 @@ function Contact() {
                     </p>
                   </div>
                 </div>
-
               </div>
             </motion.div>
 
@@ -150,51 +207,85 @@ function Contact() {
                 back to you.
               </p>
 
-              <form className="mt-8 space-y-5">
-
+              <form
+                onSubmit={handleSubmit}
+                className="mt-8 space-y-5"
+              >
                 <div>
-                  <label className="mb-2 block text-sm font-medium text-slate-300">
+                  <label
+                    htmlFor="contact-name"
+                    className="mb-2 block text-sm font-medium text-slate-300"
+                  >
                     Name
                   </label>
 
                   <input
+                    id="contact-name"
+                    name="name"
                     type="text"
+                    autoComplete="name"
+                    required
+                    minLength={2}
+                    maxLength={100}
                     placeholder="Your name"
                     className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3.5 text-white outline-none placeholder:text-slate-500 focus:border-cyan-400"
                   />
                 </div>
 
                 <div>
-                  <label className="mb-2 block text-sm font-medium text-slate-300">
+                  <label
+                    htmlFor="contact-email"
+                    className="mb-2 block text-sm font-medium text-slate-300"
+                  >
                     Email
                   </label>
 
                   <input
+                    id="contact-email"
+                    name="email"
                     type="email"
+                    autoComplete="email"
+                    required
+                    maxLength={254}
                     placeholder="you@example.com"
                     className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3.5 text-white outline-none placeholder:text-slate-500 focus:border-cyan-400"
                   />
                 </div>
 
                 <div>
-                  <label className="mb-2 block text-sm font-medium text-slate-300">
+                  <label
+                    htmlFor="contact-phone"
+                    className="mb-2 block text-sm font-medium text-slate-300"
+                  >
                     Phone
                   </label>
 
                   <input
+                    id="contact-phone"
+                    name="phone"
                     type="tel"
+                    autoComplete="tel"
+                    maxLength={30}
                     placeholder="Your phone number"
                     className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3.5 text-white outline-none placeholder:text-slate-500 focus:border-cyan-400"
                   />
                 </div>
 
                 <div>
-                  <label className="mb-2 block text-sm font-medium text-slate-300">
+                  <label
+                    htmlFor="contact-message"
+                    className="mb-2 block text-sm font-medium text-slate-300"
+                  >
                     Message
                   </label>
 
                   <textarea
-                    rows="5"
+                    id="contact-message"
+                    name="message"
+                    rows={5}
+                    required
+                    minLength={5}
+                    maxLength={5000}
                     placeholder="Tell us about your requirements..."
                     className="w-full resize-none rounded-xl border border-white/10 bg-white/5 px-4 py-3.5 text-white outline-none placeholder:text-slate-500 focus:border-cyan-400"
                   />
@@ -202,15 +293,29 @@ function Contact() {
 
                 <button
                   type="submit"
-                  className="flex w-full items-center justify-center gap-2 rounded-xl bg-cyan-400 px-6 py-3.5 font-semibold text-slate-950 transition hover:bg-cyan-300"
+                  disabled={status === "loading"}
+                  className="flex w-full items-center justify-center gap-2 rounded-xl bg-cyan-400 px-6 py-3.5 font-semibold text-slate-950 transition hover:bg-cyan-300 disabled:cursor-not-allowed disabled:opacity-60"
                 >
-                  Send Message
-                  <Send size={18} />
+                  {status === "loading" ? "Sending..." : "Send Message"}
+
+                  {status !== "loading" && <Send size={18} />}
                 </button>
 
+                {statusMessage && (
+                  <p
+                    role="status"
+                    aria-live="polite"
+                    className={`rounded-xl border p-4 text-sm leading-6 ${
+                      status === "success"
+                        ? "border-green-400/20 bg-green-400/10 text-green-300"
+                        : "border-red-400/20 bg-red-400/10 text-red-300"
+                    }`}
+                  >
+                    {statusMessage}
+                  </p>
+                )}
               </form>
             </motion.div>
-
           </div>
         </div>
       </section>
@@ -218,7 +323,6 @@ function Contact() {
       {/* Bottom CTA */}
       <section className="bg-slate-50 py-20">
         <div className="mx-auto max-w-4xl px-6 text-center">
-
           <h2 className="text-3xl font-bold text-slate-900 md:text-4xl">
             Looking to Strengthen Your Privacy Framework?
           </h2>
@@ -235,10 +339,8 @@ function Contact() {
             Email Us
             <ArrowRight size={18} />
           </a>
-
         </div>
       </section>
-
     </div>
   );
 }
