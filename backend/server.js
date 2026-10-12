@@ -6,17 +6,18 @@ require("dotenv").config();
 
 const app = express();
 
-// Allow local Vite development ports
+
 const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:5174",
   "http://localhost:5175",
+  "https://polivexa.com",
+  "https://www.polivexa.com",
 ];
 
 app.use(
   cors({
     origin: function (origin, callback) {
-      // Allow requests without an Origin header, such as local health checks
       if (!origin || allowedOrigins.includes(origin)) {
         return callback(null, true);
       }
@@ -27,6 +28,7 @@ app.use(
 );
 
 app.use(express.json());
+
 
 // Contact form database schema
 const contactSchema = new mongoose.Schema(
