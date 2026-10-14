@@ -333,7 +333,7 @@ function Contact() {
           </p>
 
           <a
-            href="mailto:polivexa2026@gmail.com"
+            href="mailto:support@polivexa.com"
             className="mt-7 inline-flex items-center gap-2 rounded-lg bg-slate-950 px-6 py-3.5 font-semibold text-white transition hover:bg-cyan-600"
           >
             Email Us

@@ -1,16 +1,30 @@
-
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
+import { Menu, X, ChevronDown, BookOpen } from "lucide-react";
 import polivexaLogo from "../assets/polivexa-logo.png";
 
 function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
 
+  const location = useLocation();
+
   const closeMenus = () => {
     setMobileOpen(false);
     setServicesOpen(false);
+  };
+
+  // Same Home page par dobara Home click karne par bhi top par jayega.
+  const handleHomeClick = () => {
+    closeMenus();
+
+    if (location.pathname === "/") {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      });
+    }
   };
 
   const navLinkClass =
@@ -25,12 +39,11 @@ function Navbar() {
   return (
     <header className="fixed left-0 right-0 top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur-md">
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-8">
-
-        {/* Logo + Polivexa Brand Name */}
+        {/* Logo */}
         <Link
           to="/"
           className="flex items-center gap-3"
-          onClick={closeMenus}
+          onClick={handleHomeClick}
         >
           <img
             src={polivexaLogo}
@@ -45,11 +58,11 @@ function Navbar() {
 
         {/* Desktop Navigation */}
         <nav className="hidden items-center gap-8 lg:flex">
-          <Link to="/" className={navLinkClass}>
+          <Link to="/" className={navLinkClass} onClick={handleHomeClick}>
             Home
           </Link>
 
-          <Link to="/about" className={navLinkClass}>
+          <Link to="/about" className={navLinkClass} onClick={closeMenus}>
             About Us
           </Link>
 
@@ -71,7 +84,7 @@ function Navbar() {
             </button>
 
             {servicesOpen && (
-              <div className="absolute left-0 top-full mt-4 w-64 rounded-xl border border-slate-200 bg-white p-2 shadow-xl">
+              <div className="absolute left-0 top-full mt-4 w-72 rounded-xl border border-slate-200 bg-white p-2 shadow-xl">
                 <Link
                   to="/services"
                   onClick={closeMenus}
@@ -103,19 +116,21 @@ function Navbar() {
                 >
                   Data Protection Advisory
                 </Link>
+
+                
               </div>
             )}
           </div>
 
-          <Link to="/careers" className={navLinkClass}>
+          <Link to="/careers" className={navLinkClass} onClick={closeMenus}>
             Careers
           </Link>
 
-          <Link to="/blogs" className={navLinkClass}>
+          <Link to="/blogs" className={navLinkClass} onClick={closeMenus}>
             Blogs & Updates
           </Link>
 
-          <Link to="/contact" className={navLinkClass}>
+          <Link to="/contact" className={navLinkClass} onClick={closeMenus}>
             Contact Us
           </Link>
         </nav>
@@ -139,22 +154,11 @@ function Navbar() {
       {mobileOpen && (
         <div className="max-h-[calc(100vh-5rem)] overflow-y-auto border-t border-slate-200 bg-white px-6 py-5 lg:hidden">
           <nav className="flex flex-col gap-2">
-
-            {/* Home */}
-            <Link
-              to="/"
-              onClick={closeMenus}
-              className={mobileLinkClass}
-            >
+            <Link to="/" onClick={handleHomeClick} className={mobileLinkClass}>
               Home
             </Link>
 
-            {/* About */}
-            <Link
-              to="/about"
-              onClick={closeMenus}
-              className={mobileLinkClass}
-            >
+            <Link to="/about" onClick={closeMenus} className={mobileLinkClass}>
               About Us
             </Link>
 
@@ -209,11 +213,12 @@ function Navbar() {
                   >
                     Data Protection Advisory
                   </Link>
+
+                  
                 </div>
               )}
             </div>
 
-            {/* Careers */}
             <Link
               to="/careers"
               onClick={closeMenus}
@@ -222,16 +227,10 @@ function Navbar() {
               Careers
             </Link>
 
-            {/* Blogs */}
-            <Link
-              to="/blogs"
-              onClick={closeMenus}
-              className={mobileLinkClass}
-            >
+            <Link to="/blogs" onClick={closeMenus} className={mobileLinkClass}>
               Blogs & Updates
             </Link>
 
-            {/* Contact */}
             <Link
               to="/contact"
               onClick={closeMenus}
