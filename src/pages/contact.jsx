@@ -141,10 +141,10 @@ function Contact() {
                     </p>
 
                     <a
-                      href="mailto:polivexa2026@gmail.com"
+                      href="mailto:support@polivexa.com"
                       className="mt-1 block font-medium text-slate-900 hover:text-cyan-600"
                     >
-                      polivexa2026@gmail.com
+                      support@polivexa.com
                     </a>
                   </div>
                 </div>
