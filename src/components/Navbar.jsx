@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
@@ -24,17 +25,22 @@ function Navbar() {
   return (
     <header className="fixed left-0 right-0 top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur-md">
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-8">
-        {/* Logo */}
+
+        {/* Logo + Polivexa Brand Name */}
         <Link
           to="/"
-          className="flex items-center gap-6"
+          className="flex items-center gap-3"
           onClick={closeMenus}
         >
           <img
             src={polivexaLogo}
-            alt="Polivexa"
+            alt="Polivexa Logo"
             className="h-12 w-auto object-contain"
           />
+
+          <span className="text-2xl font-bold tracking-tight text-slate-900">
+            Polivexa
+          </span>
         </Link>
 
         {/* Desktop Navigation */}
@@ -133,6 +139,7 @@ function Navbar() {
       {mobileOpen && (
         <div className="max-h-[calc(100vh-5rem)] overflow-y-auto border-t border-slate-200 bg-white px-6 py-5 lg:hidden">
           <nav className="flex flex-col gap-2">
+
             {/* Home */}
             <Link
               to="/"
