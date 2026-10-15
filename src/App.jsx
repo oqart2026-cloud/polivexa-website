@@ -72,7 +72,7 @@ function App() {
           <Routes>
             {/* Home */}
             <Route path="/" element={<Home />} />
-
+<Route path="/blogs/:slug" element={<BlogArticle />} />
             {/* About Us */}
             <Route path="/about" element={<About />} />
 
