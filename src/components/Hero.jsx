@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -42,7 +41,7 @@ function Hero() {
       <div
         className="
           relative w-full
-          h-[460px]
+          h-[440px]
           sm:h-[520px]
           md:h-[560px]
           lg:h-[620px]
@@ -63,8 +62,24 @@ function Hero() {
              <img
   src={dpdpHero1}
   alt="Polivexa DPDP Compliance and Data Protection Solutions"
-  className="block h-full w-full object-contain"
+  className="hidden h-full w-full object-contain md:block"
 />
+              {/* The desktop artwork contains baked-in text; on narrow screens
+                  reproduce its message as readable, responsive HTML. */}
+              <div className="flex h-full w-full flex-col justify-center px-12 pb-9 pt-7 text-center text-white md:hidden">
+                <p className="mb-3 text-[11px] font-semibold uppercase tracking-widest text-cyan-400">The real risk</p>
+                <h2 className="text-[clamp(23px,6.5vw,34px)] font-bold leading-[1.14]">
+                  Non-compliance can cost up to <span className="text-emerald-400">₹250 crore</span> per breach
+                </h2>
+                <p className="mx-auto mt-4 max-w-sm text-[13px] leading-[1.55] text-slate-300">
+                  Protect data principal rights, manage consent, and maintain audit-ready compliance.
+                </p>
+                <div className="mt-6 grid grid-cols-3 gap-2">
+                  <div className="rounded-xl border border-cyan-500/30 bg-white/5 px-1 py-3"><strong className="block text-base text-white">₹250 Cr</strong><span className="mt-1 block text-[10px] leading-tight text-slate-300">Max penalty</span></div>
+                  <div className="rounded-xl border border-cyan-500/30 bg-white/5 px-1 py-3"><strong className="block text-base text-white">22</strong><span className="mt-1 block text-[10px] leading-tight text-slate-300">Languages</span></div>
+                  <div className="rounded-xl border border-cyan-500/30 bg-white/5 px-1 py-3"><strong className="block text-base text-white">72 hrs</strong><span className="mt-1 block text-[10px] leading-tight text-slate-300">Notification</span></div>
+                </div>
+              </div>
             </motion.div>
           )}
 
@@ -83,7 +98,7 @@ function Hero() {
                 from-[#061126]
                 via-[#0a1c3d]
                 to-[#03101f]
-                px-12 py-12
+                px-12 py-10
                 sm:px-16
                 md:px-20
               "
@@ -102,7 +117,7 @@ function Hero() {
 
                 <h2
                   className="
-                    text-[30px] font-bold leading-tight text-white
+                    text-[clamp(26px,7vw,34px)] font-bold leading-tight text-white
                     sm:text-4xl
                     md:text-5xl
                     lg:text-6xl
@@ -116,8 +131,8 @@ function Hero() {
 
                 <p
                   className="
-                    mx-auto mt-5 max-w-2xl
-                    text-sm leading-6 text-slate-300
+                    mx-auto mt-4 max-w-2xl
+                    text-[13px] leading-6 text-slate-300
                     sm:text-base sm:leading-7
                     md:mt-6 md:text-lg md:leading-8
                   "
@@ -130,7 +145,7 @@ function Hero() {
                 <a
                   href="/contact"
                   className="
-                    mt-7 inline-flex items-center justify-center
+                    mt-6 inline-flex items-center justify-center
                     rounded-full bg-cyan-400
                     px-6 py-3
                     text-sm font-semibold text-[#061126]
