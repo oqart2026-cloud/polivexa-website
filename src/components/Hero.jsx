@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
+
+
 import dpdpHero1 from "../assets/dpdp-hero-1.png";
 
 function Hero() {
@@ -58,12 +60,11 @@ function Hero() {
               transition={{ duration: 0.5 }}
               className="absolute inset-0 flex items-center justify-center bg-[#061126]"
             >
-              <img
-                src={dpdpHero1}
-                alt="Polivexa DPDP Compliance and Data Protection Solutions"
-                fetchPriority="high"
-                className="block h-full w-full object-contain"
-              />
+             <img
+  src={dpdpHero1}
+  alt="Polivexa DPDP Compliance and Data Protection Solutions"
+  className="block h-full w-full object-contain"
+/>
             </motion.div>
           )}
 
