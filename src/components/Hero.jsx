@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -9,84 +10,155 @@ function Hero() {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setCurrentSlide((prev) => (prev === 0 ? 1 : 0));
+      setCurrentSlide((prev) => (prev + 1) % 2);
     }, 5000);
 
     return () => clearTimeout(timer);
   }, [currentSlide]);
 
   const changeSlide = (direction) => {
-    setCurrentSlide((prev) => {
-      if (direction === "next") return prev === 0 ? 1 : 0;
-      return prev === 0 ? 1 : 0;
-    });
+    setCurrentSlide((prev) =>
+      direction === "next" ? (prev + 1) % 2 : (prev + 1) % 2
+    );
   };
 
   return (
-    <section className="relative w-full overflow-hidden bg-[#061126]">
-      <AnimatePresence mode="wait">
-        {/* SLIDE 1: FULL IMAGE */}
-        {currentSlide === 0 && (
-          <motion.div
-            key="slide-1"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
-            className="relative w-full"
-          >
-            <img
-              src={dpdpHero1}
-              alt="Polivexa DPDP Compliance and Data Protection Solutions"
-              fetchPriority="high"
-              className="block h-auto w-full max-w-full object-contain"
-              style={{ objectFit: "contain" }}
-            />
-          </motion.div>
-        )}
+    <section
+      aria-label="Polivexa homepage highlights"
+      className="relative w-full overflow-hidden bg-[#061126]"
+    >
+      {/*
+        IMPORTANT:
+        Same outer height for BOTH slides.
 
-        {/* SLIDE 2: RESPONSIVE TEXT */}
-        {currentSlide === 1 && (
-          <motion.div
-            key="slide-2"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
-            className="flex min-h-[390px] w-full items-center justify-center bg-gradient-to-br from-[#061126] via-[#0a1c3d] to-[#03101f] px-14 py-14 sm:min-h-[430px] sm:px-16 md:min-h-[500px] md:px-20"
-          >
-            <div className="mx-auto w-full max-w-4xl text-center">
-              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-400 sm:text-sm sm:tracking-[0.3em]">
-                Privacy &amp; Data Security
-              </p>
+        Mobile: enough room for readable text.
+        Desktop: matches the wide banner proportions.
 
-              <h2 className="text-3xl font-bold leading-tight text-white sm:text-4xl md:text-6xl">
-                Protect Every
-                <span className="mt-1 block text-cyan-400">Piece of Data.</span>
-              </h2>
+        Slide 1 uses object-contain, never object-cover,
+        so the image is not cropped.
+      */}
+      <div
+        className="
+          relative w-full
+          h-[460px]
+          sm:h-[520px]
+          md:h-[560px]
+          lg:h-[620px]
+          xl:h-[680px]
+        "
+      >
+        <AnimatePresence mode="wait">
+          {/* SLIDE 1: FULL IMAGE — NO CROPPING */}
+          {currentSlide === 0 && (
+            <motion.div
+              key="slide-1"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+              className="absolute inset-0 flex items-center justify-center bg-[#061126]"
+            >
+              <img
+                src={dpdpHero1}
+                alt="Polivexa DPDP Compliance and Data Protection Solutions"
+                fetchPriority="high"
+                className="block h-full w-full object-contain"
+              />
+            </motion.div>
+          )}
 
-              <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-slate-300 sm:text-base md:mt-6 md:text-lg md:leading-8">
-                Build stronger privacy frameworks, reduce compliance risks, and
-                create trust through responsible data protection.
-              </p>
+          {/* SLIDE 2: RESPONSIVE CONTENT */}
+          {currentSlide === 1 && (
+            <motion.div
+              key="slide-2"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+              className="
+                absolute inset-0
+                flex items-center justify-center
+                bg-gradient-to-br
+                from-[#061126]
+                via-[#0a1c3d]
+                to-[#03101f]
+                px-12 py-12
+                sm:px-16
+                md:px-20
+              "
+            >
+              <div className="mx-auto w-full max-w-4xl text-center">
+                <p
+                  className="
+                    mb-4
+                    text-[10px] font-semibold uppercase
+                    tracking-[0.2em] text-cyan-400
+                    sm:text-sm sm:tracking-[0.3em]
+                  "
+                >
+                  Privacy &amp; Data Security
+                </p>
 
-              <a
-                href="/contact"
-                className="mt-7 inline-flex items-center justify-center rounded-full bg-cyan-400 px-6 py-3 text-sm font-semibold text-[#061126] transition hover:bg-cyan-300 sm:text-base"
-              >
-                Talk to an Expert
-              </a>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+                <h2
+                  className="
+                    text-[30px] font-bold leading-tight text-white
+                    sm:text-4xl
+                    md:text-5xl
+                    lg:text-6xl
+                  "
+                >
+                  Protect Every
+                  <span className="mt-1 block text-cyan-400">
+                    Piece of Data.
+                  </span>
+                </h2>
 
-      {/* SLIDE NAVIGATION ARROWS */}
+                <p
+                  className="
+                    mx-auto mt-5 max-w-2xl
+                    text-sm leading-6 text-slate-300
+                    sm:text-base sm:leading-7
+                    md:mt-6 md:text-lg md:leading-8
+                  "
+                >
+                  Build stronger privacy frameworks, reduce compliance
+                  risks, and create trust through responsible data
+                  protection.
+                </p>
+
+                <a
+                  href="/contact"
+                  className="
+                    mt-7 inline-flex items-center justify-center
+                    rounded-full bg-cyan-400
+                    px-6 py-3
+                    text-sm font-semibold text-[#061126]
+                    transition hover:bg-cyan-300
+                    sm:text-base
+                  "
+                >
+                  Talk to an Expert
+                </a>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+
+      {/* NAVIGATION ARROWS */}
       <button
         type="button"
         onClick={() => changeSlide("previous")}
         aria-label="Previous slide"
-        className="absolute left-2 top-1/2 z-20 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-black/50 text-white backdrop-blur-sm sm:left-4 sm:h-11 sm:w-11"
+        className="
+          absolute left-2 top-1/2 z-20
+          flex h-8 w-8 -translate-y-1/2
+          items-center justify-center
+          rounded-full border border-white/20
+          bg-black/50 text-white backdrop-blur-sm
+          transition hover:bg-black/70
+          sm:left-4 sm:h-11 sm:w-11
+        "
       >
         <ChevronLeft size={19} />
       </button>
@@ -95,19 +167,36 @@ function Hero() {
         type="button"
         onClick={() => changeSlide("next")}
         aria-label="Next slide"
-        className="absolute right-2 top-1/2 z-20 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-black/50 text-white backdrop-blur-sm sm:right-4 sm:h-11 sm:w-11"
+        className="
+          absolute right-2 top-1/2 z-20
+          flex h-8 w-8 -translate-y-1/2
+          items-center justify-center
+          rounded-full border border-white/20
+          bg-black/50 text-white backdrop-blur-sm
+          transition hover:bg-black/70
+          sm:right-4 sm:h-11 sm:w-11
+        "
       >
         <ChevronRight size={19} />
       </button>
 
       {/* SLIDE INDICATORS */}
-      <div className="absolute bottom-3 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2 sm:bottom-5">
+      <div
+        className="
+          absolute bottom-4 left-1/2 z-20
+          flex -translate-x-1/2 items-center gap-2
+          sm:bottom-5
+        "
+      >
         <button
           type="button"
           onClick={() => setCurrentSlide(0)}
           aria-label="Show first slide"
+          aria-current={currentSlide === 0 ? "true" : undefined}
           className={`h-2 rounded-full transition-all ${
-            currentSlide === 0 ? "w-7 bg-cyan-400" : "w-2 bg-white/50"
+            currentSlide === 0
+              ? "w-7 bg-cyan-400"
+              : "w-2 bg-white/50"
           }`}
         />
 
@@ -115,8 +204,11 @@ function Hero() {
           type="button"
           onClick={() => setCurrentSlide(1)}
           aria-label="Show second slide"
+          aria-current={currentSlide === 1 ? "true" : undefined}
           className={`h-2 rounded-full transition-all ${
-            currentSlide === 1 ? "w-7 bg-cyan-400" : "w-2 bg-white/50"
+            currentSlide === 1
+              ? "w-7 bg-cyan-400"
+              : "w-2 bg-white/50"
           }`}
         />
       </div>
